@@ -21,7 +21,11 @@ install: all
 		cp interface/*hxx $$HOME/include/ansak ;\
 		mkdir -p $$HOME/lib ;\
 		cp build/Release/libansakString.a $$HOME/lib ;\
-	elif [ `uname | sed 's/\(.....\).*/\1/'` = "MINGW" ]; \
+	elif [ `uname | sed 's/\(.....\).*/\1/'` = "MINGW" ]; then\
+		mkdir -p /usr/local/include/ansak ;\
+		cp interface/*hxx /usr/local/include/ansak ;\
+		cp build/libansakString.a /usr/local/lib ;\
+	elif [ `uname | sed 's/\(......\).*/\1/'` = "CYGWIN" ]; then\
 		mkdir -p /usr/local/include/ansak ;\
 		cp interface/*hxx /usr/local/include/ansak ;\
 		cp build/libansakString.a /usr/local/lib ;\
@@ -33,9 +37,12 @@ install: all
 
 uninstall:
 	if [ `uname` = "Darwin" ]; then\
-		rm $$HOME/include/ansak/string.hxx $$HOME/include/ansak/string_trim.hxx $$HOME/include/ansak/string_splitjoin.hxx
+		rm $$HOME/include/ansak/string.hxx $$HOME/include/ansak/string_trim.hxx $$HOME/include/ansak/string_splitjoin.hxx ;\
 		rm $$HOME/lib/libansakString.a ;\
-	elif [ `uname | sed 's/\(.....\).*/\1/'` = "MINGW" ]; \
+	elif [ `uname | sed 's/\(.....\).*/\1/'` = "MINGW" ]; then\
+		rm /usr/local/include/ansak/string.hxx /usr/local/include/ansak/string_trim.hxx /usr/local/include/ansak/string_splitjoin.hxx  ;\
+		rm /usr/local/lib/libansakString.a  ;\
+	elif [ `uname | sed 's/\(......\).*/\1/'` = "CYGWIN" ]; then\
 		rm /usr/local/include/ansak/string.hxx /usr/local/include/ansak/string_trim.hxx /usr/local/include/ansak/string_splitjoin.hxx  ;\
 		rm /usr/local/lib/libansakString.a  ;\
 	else \
